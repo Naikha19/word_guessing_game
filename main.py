@@ -1,13 +1,39 @@
 import random as rm
 
-word_bank = [
+easy_words = [
     "apple", "chair", "house", "water", "bread",
-    "smile", "light", "green", "table", "clock",
-    "phone", "shirt", "plant", "music", "river"
+    "smile", "light", "green", "table", "clock"
 ]
 
-def get_random_word():
-    return rm.choice(word_bank)
+medium_words = [
+    "python", "library", "picture", "holiday",
+    "monster", "journey", "battery", "science"
+]
+
+hard_words = [
+    "programming", "architecture", "intelligence",
+    "cybersecurity", "cryptography", "biotechnology"
+]
+
+def choose_difficulty():
+    while True:
+        print(f"\nChoose difficulty.")
+        print(f"1️⃣  Easy")
+        print(f"2️⃣  Medium")
+        print(f"3️⃣  Hard")
+
+        choice = input("Enter 1,2 or 3: ")
+        if choice == "1":
+            return easy_words,12
+        elif choice == "2":
+            return medium_words,9
+        elif choice == "3":
+            return hard_words,6
+        else:
+            print("Invalid choice! Try again")
+            
+def get_random_word(word_list):
+    return rm.choice(word_list)
 
 def display_state(attempts, guessed_letters, guess_word):
     print(f"\nAttempts remaining: {attempts}")
@@ -33,10 +59,10 @@ def update_word(word, guess_word,guess):
     return  found         
 
 def play_game():
-    word = get_random_word()
+    word_list, attempts = choose_difficulty()
+    word = get_random_word(word_list)
     guess_word = ['_'] * len(word)
     guessed_letters = set()
-    attempts = 10
     
     while attempts > 0:    
         display_state(attempts,guessed_letters, guess_word)  
@@ -53,7 +79,7 @@ def play_game():
         if "_" not in guess_word:
             print(f"Congratulations 🎉 You guessed the word '{word}'")
             return
-    if attempts == 0  and "_" in guess_word:
-        print(f"Game Over!\nThe word was {word}")
+
+    print(f"Game Over!\nThe word was {word}")
         
 play_game()
