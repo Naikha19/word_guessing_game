@@ -15,6 +15,8 @@ attempts = 10
 while attempts > 0:
     print("Current word: "+" ".join(guessWord))
     guess = input("Enter a letter: ").lower()
+    if len(guess) != 1 or not guess.isalpha:
+        print(f"⚠️  Please enter a single letter only")
     
     if guess in word:
         for i in range(len(word)):
