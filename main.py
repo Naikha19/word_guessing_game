@@ -14,19 +14,25 @@ attempts = 10
 guess_letters = set()
 while attempts > 0:
     print("Current word: "+" ".join(guessWord))
+    print("Guessed letters: "+" ".join(sorted(guess_letters)))
     guess = input("Enter a letter: ").lower()
     
-    if len(guess) != 1 or not guess.isalpha:
+    #Input check
+    if len(guess) != 1 or not guess.isalpha():
         print(f"⚠️  Please enter a single letter only")
+        continue
+    
+    #Duplicate check
+    if guess in guess_letters:
+        print(f"⚠️  You already guessed that letter")
+        continue    
+    guess_letters.add(guess)
     
     if guess in word:
         for i in range(len(word)):
             if word[i] == guess:
                 guessWord[i] = guess
-        if guess in guess_letters:
-            print(f"You already guessed that letter")
-            continue    
-        guess_letters.add(guess)
+        
         print(f"Great guess 😊")  
         
     else:
@@ -37,5 +43,5 @@ while attempts > 0:
         print(f"Congratulations 🎉 You guess the word {word}")
         break
     
-    if attempts == 0  and "_" in guessWord:
-        print(f"Game Over!\nThe word was {word}")
+if attempts == 0  and "_" in guessWord:
+    print(f"Game Over!\nThe word was {word}")
