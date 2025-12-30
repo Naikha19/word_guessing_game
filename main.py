@@ -1,0 +1,34 @@
+import random as rm
+
+word_bank = [
+    "apple", "chair", "house", "water", "bread",
+    "smile", "light", "green", "table", "clock",
+    "phone", "shirt", "plant", "music", "river"
+]
+
+word = rm.choice(word_bank)
+
+guessWord = ['_'] * len(word)
+
+attempts = 10
+
+while attempts > 0:
+    print("Current word: "+" ".join(guessWord))
+    guess = input("Enter a letter: ").lower()
+    
+    if guess in word:
+        for i in range(len(word)):
+            if word[i] == guess:
+                guessWord[i] = guess
+        print(f"Great guess 😊")
+    
+    else:
+        attempts -= 1
+        print(f"Wrong guess ❌ {attempts} attempts remaining !!")
+        
+    if '_' not in guessWord:
+        print(f"Congratulations 🎉 You guess the word {word}")
+        break
+    
+    if attempts == 0  and "_" in guessWord:
+        print(f"Game Over!\n{attempts} attempts remaining\tThe word was {word}")
