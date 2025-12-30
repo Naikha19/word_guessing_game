@@ -40,7 +40,7 @@ while attempts > 0:
         print(f"Wrong guess ❌ {attempts} attempts remaining !!")
         
     if '_' not in guessWord:
-        print(f"Congratulations 🎉 You guess the word {word}")
+        print(f"Congratulations 🎉 You guessed the word '{word}'")
         break
     
 if attempts == 0  and "_" in guessWord:
